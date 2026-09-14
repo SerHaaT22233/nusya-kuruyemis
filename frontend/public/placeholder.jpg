@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#0D0D0D"/>
+  <g fill="none" stroke="#F59E0B" stroke-width="1.5" opacity="0.4">
+    <circle cx="200" cy="200" r="120"/>
+    <circle cx="200" cy="200" r="80"/>
+    <circle cx="200" cy="200" r="40"/>
+  </g>
+  <text x="200" y="205" text-anchor="middle" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="14" font-weight="500">NUSYA</text>
+</svg>

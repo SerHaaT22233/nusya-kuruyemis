@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#0D0D0D"/>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="300" cy="300" r="180" fill="url(#g)"/>
+  <circle cx="300" cy="300" r="100" fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.4"/>
+  <circle cx="300" cy="300" r="40" fill="#F59E0B" opacity="0.2"/>
+  <text x="300" y="480" text-anchor="middle" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="16" font-weight="600">ANTEP FISTIK</text>
+  <text x="300" y="510" text-anchor="middle" fill="#F59E0B" font-family="system-ui, sans-serif" font-size="14" font-weight="500">450 TL</text>
+</svg>
