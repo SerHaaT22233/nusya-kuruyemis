@@ -111,7 +111,7 @@ export default function FavoritesPage() {
                 <Link href={`/products/${favorite.product.slug}`}>
                   <div className="relative aspect-square overflow-hidden bg-brand-50">
                     <Image
-                      src={favorite.product.images?.[0]?.imageUrl || '/placeholder.jpg'}
+                      src={(favorite.product.images as any[])?.[0]?.imageUrl || '/placeholder.jpg'}
                       alt={favorite.product.name}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700"

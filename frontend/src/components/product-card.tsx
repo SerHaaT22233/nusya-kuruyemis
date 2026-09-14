@@ -29,7 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     addToCart(product.id)
   }
 
-  const imageUrl = product.images?.[0]?.imageUrl?.imageUrl || '/placeholder.jpg'
+  const imageUrl = (product.images as any[])?.[0]?.imageUrl || '/placeholder.jpg'
 
   return (
     <motion.div

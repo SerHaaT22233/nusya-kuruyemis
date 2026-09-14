@@ -51,20 +51,8 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-brand-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="animate-pulse">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="aspect-square bg-brand-50-card rounded-3xl" />
-              <div className="space-y-6">
-                <div className="h-6 bg-brand-50-card rounded-xl w-1/4" />
-                <div className="h-10 bg-brand-50-card rounded-xl w-3/4" />
-                <div className="h-8 bg-brand-50-card rounded-xl w-1/4" />
-                <div className="h-24 bg-brand-50-card rounded-xl" />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="min-h-screen bg-brand-50 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-brand-200 border-t-brand-500 rounded-full animate-spin" />
       </div>
     )
   }
@@ -73,153 +61,75 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-screen bg-brand-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-ink-900 mb-2">Ürün bulunamadı</h1>
-          <p className="text-ink-900/50">Aradığınız ürün mevcut değil.</p>
+          <h1 className="text-2xl font-bold text-ink-900 mb-4">Ürün bulunamadı</h1>
+          <Link href="/products" className="text-brand-600 hover:text-brand-700">Ürünlere Dön</Link>
         </div>
       </div>
     )
   }
 
-  const currentPrice = product.discountedPrice || product.price
-
   return (
     <div className="min-h-screen bg-brand-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-ink-900/40 mb-8">
-          <Link href="/" className="hover:text-brand-600 transition-colors">Ana Sayfa</Link>
-          <span>/</span>
-          <Link href="/products" className="hover:text-brand-600 transition-colors">Ürünler</Link>
-          <span>/</span>
-          <Link href={`/products?category=${product.category.slug}`} className="hover:text-brand-600 transition-colors">
-            {product.category.name}
-          </Link>
-          <span>/</span>
-          <span className="text-ink-900/80">{product.name}</span>
-        </nav>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Images */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            className="space-y-4"
-          >
-            <div className="aspect-square rounded-3xl overflow-hidden bg-brand-50-card border border-ink-200">
-              <Image
-                src={product.images?.[0]?.imageUrl || '/placeholder.jpg'}
-                alt={product.name}
-                width={600}
-                height={600}
-                className="w-full h-full object-cover"
-                priority
-              />
-            </div>
-            {product.images?.length > 1 && (
-              <div className="flex gap-3 overflow-x-auto pb-2">
-                {product.images.map((img, i) => (
-                  <div key={i} className="w-20 h-20 rounded-xl overflow-hidden bg-brand-50-card border border-ink-200 flex-shrink-0">
-                    <Image src={img} alt="" width={80} height={80} className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-            )}
-          </motion.div>
-
-          {/* Product Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            className="flex flex-col"
-          >
-            <div>
-              <span className="inline-block text-xs font-medium text-brand-500 uppercase tracking-wider mb-3">
-                {product.category.name}
-              </span>
-              <h1 className="text-3xl sm:text-4xl font-bold text-ink-900 mb-4 tracking-tight">{product.name}</h1>
-
-              <div className="flex items-baseline gap-3 mb-6">
-                <span className="text-3xl font-bold text-brand-600">{currentPrice} TL</span>
-                {product.discountedPrice && (
-                  <span className="text-lg text-ink-900/30 line-through">{product.price} TL</span>
-                )}
-              </div>
-
-              {product.description && (
-                <p className="text-ink-900/50 leading-relaxed mb-8">{product.description}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="aspect-square rounded-3xl overflow-hidden bg-brand-100 border border-ink-200">
+            <Image
+              src={(product.images as any[])?.[0]?.imageUrl || '/placeholder.jpg'}
+              alt={product.name}
+              width={600}
+              height={600}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-ink-900 mb-4">{product.name}</h1>
+            <p className="text-ink-600 mb-6">{product.description}</p>
+            <div className="flex items-center gap-4 mb-8">
+              {product.discountedPrice ? (
+                <>
+                  <span className="text-3xl font-bold text-brand-600">{product.discountedPrice} TL</span>
+                  <span className="text-lg text-ink-400 line-through">{product.price} TL</span>
+                </>
+              ) : (
+                <span className="text-3xl font-bold text-ink-900">{product.price} TL</span>
               )}
-
-              <div className="mb-8">
-                <h3 className="text-sm font-semibold text-ink-900 uppercase tracking-wider mb-4">Miktar</h3>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center border border-ink-200 rounded-xl overflow-hidden">
-                    <button
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="p-3 hover:bg-brand-50 transition-colors duration-300"
-                    >
-                      <Minus className="w-4 h-4 text-ink-900/70" />
-                    </button>
-                    <span className="px-6 py-3 font-semibold text-ink-900 min-w-[48px] text-center">{quantity}</span>
-                    <button
-                      onClick={() => setQuantity(quantity + 1)}
-                      className="p-3 hover:bg-brand-50 transition-colors duration-300"
-                    >
-                      <Plus className="w-4 h-4 text-ink-900/70" />
-                    </button>
-                  </div>
-                  <span className="text-sm text-ink-900/40">{product.stock} adet stokta</span>
-                </div>
-              </div>
-
-              <div className="flex gap-4 mb-10">
-                <button
-                  onClick={handleAddToCart}
-                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-brand-500 to-sun-500 text-black font-semibold rounded-2xl hover:shadow-2xl hover:shadow-brand-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <ShoppingCart className="w-5 h-5" />
-                  Sepete Ekle
+            </div>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center border border-ink-200 rounded-xl overflow-hidden">
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-4 py-3 hover:bg-brand-50">
+                  <Minus className="w-4 h-4 text-ink-600" />
                 </button>
-                <button
-                  onClick={() => setIsLiked(!isLiked)}
-                  className="p-4 border border-ink-200 rounded-2xl hover:border-brand-400 hover:bg-brand-500/[0.06] transition-all duration-300"
-                >
-                  <Heart className={`w-5 h-5 ${isLiked ? 'text-red-500 fill-red-500' : 'text-ink-900/70'}`} />
+                <span className="px-6 py-3 font-semibold text-ink-900">{quantity}</span>
+                <button onClick={() => setQuantity(quantity + 1)} className="px-4 py-3 hover:bg-brand-50">
+                  <Plus className="w-4 h-4 text-ink-600" />
                 </button>
               </div>
-
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-ink-200">
-                <div className="flex flex-col items-center text-center gap-2">
-                  <Truck className="w-5 h-5 text-brand-500" />
-                  <span className="text-xs text-ink-900/50">Hızlı Kargo</span>
-                </div>
-                <div className="flex flex-col items-center text-center gap-2">
-                  <Shield className="w-5 h-5 text-brand-500" />
-                  <span className="text-xs text-ink-900/50">Güvenli</span>
-                </div>
-                <div className="flex flex-col items-center text-center gap-2">
-                  <RotateCcw className="w-5 h-5 text-brand-500" />
-                  <span className="text-xs text-ink-900/50">İade</span>
-                </div>
+              <button onClick={handleAddToCart} className="flex-1 py-4 bg-gradient-to-r from-brand-500 to-sun-500 text-white font-semibold rounded-xl hover:shadow-glow-brand transition-all duration-300">
+                <ShoppingCart className="w-5 h-5 inline mr-2" />
+                Sepete Ekle
+              </button>
+            </div>
+            <div className="space-y-3 text-sm text-ink-600">
+              <div className="flex items-center gap-2">
+                <Truck className="w-4 h-4 text-brand-500" />
+                Ücretsiz kargo (500 TL üzeri)
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-brand-500" />
+                Güvenli ödeme
+              </div>
+              <div className="flex items-center gap-2">
+                <RotateCcw className="w-4 h-4 text-brand-500" />
+                14 gün iade garantisi
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <section className="py-20">
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <span className="inline-block text-xs font-medium text-brand-500 uppercase tracking-wider mb-2">Benzer Ürünler</span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-ink-900">Beğenebileceğiniz Diğer Ürünler</h2>
-              </div>
-              <Link href={`/products?category=${product.category.slug}`} className="hidden sm:inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 text-sm font-medium transition-colors duration-300">
-                Tümünü Gör
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
+          <section className="mt-20">
+            <h2 className="text-2xl font-bold text-ink-900 mb-6">İlgili Ürünler</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
