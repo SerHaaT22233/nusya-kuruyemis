@@ -26,7 +26,7 @@ interface Product {
   featured: boolean
   categoryId: string
   category: { name: string }
-  images: string[]
+  images: string | string[]
 }
 
 export default function AdminProductsPage() {
@@ -108,7 +108,7 @@ export default function AdminProductsPage() {
         discountedPrice: formData.discountedPrice ? parseFloat(formData.discountedPrice) : null,
         stock: parseInt(formData.stock),
         categoryId: formData.categoryId,
-        imageUrl: formData.imageUrl || null
+        images: JSON.stringify([formData.imageUrl || '/placeholder.jpg'])
       }
 
       if (editingProduct) {
