@@ -16,12 +16,13 @@ interface SaleNotification {
 export default function LiveSalesPopup() {
   const [notifications, setNotifications] = useState<SaleNotification[]>([])
   const [isVisible, setIsVisible] = useState(false)
+  const [nextId, setNextId] = useState(1)
 
-  const mockSales: SaleNotification[] = [
-    { id: 1, name: 'Ahmet Y.', product: 'Antep Fıstığı', slug: 'antep-fistigi', time: 'Şimdi' },
-    { id: 2, name: 'Fatma K.', product: 'Kavrulmuş Badem', slug: 'kavrulmus-badem', time: '2 dk önce' },
-    { id: 3, name: 'Mehmet D.', product: 'Kaju Çekirdeği', slug: 'kaju', time: '5 dk önce' },
-    { id: 4, name: 'Zeynep S.', product: 'Kuru Üzüm', slug: 'kuru-uzum', time: '8 dk önce' },
+  const mockSales: Omit<SaleNotification, 'id'>[] = [
+    { name: 'Ahmet Y.', product: 'Antep Fıstığı', slug: 'antep-fistigi', time: 'Şimdi' },
+    { name: 'Fatma K.', product: 'Kavrulmuş Badem', slug: 'kavrulmus-badem', time: '2 dk önce' },
+    { name: 'Mehmet D.', product: 'Kaju Çekirdeği', slug: 'kaju', time: '5 dk önce' },
+    { name: 'Zeynep S.', product: 'Kuru Üzüm', slug: 'kuru-uzum', time: '8 dk önce' },
   ]
 
   useEffect(() => {
@@ -43,14 +44,16 @@ export default function LiveSalesPopup() {
     }
   }, [])
 
-  const addNotification = (sale: SaleNotification) => {
+  const addNotification = (sale: Omit<SaleNotification, 'id'>) => {
+    const id = nextId
+    setNextId(prev => prev + 1)
     setNotifications(prev => {
-      const updated = [sale, ...prev.slice(0, 2)]
+      const updated = [{ ...sale, id }, ...prev.slice(0, 2)]
       return updated
     })
     // Auto remove after 5 seconds
     setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== sale.id))
+      setNotifications(prev => prev.filter(n => n.id !== id))
     }, 5000)
   }
 
