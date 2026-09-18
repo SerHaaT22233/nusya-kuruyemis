@@ -40,7 +40,7 @@ const statusMap: Record<string, { label: string; color: string }> = {
 function AccountContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const tab = searchParams.get('tab') || 'profile'
+  const tab = searchParams?.get('tab') || 'profile'
   const { user, loading, login, register, logout, updateUser } = useAuth()
   const [orders, setOrders] = useState<Order[]>([])
   const [addresses, setAddresses] = useState<any[]>([])

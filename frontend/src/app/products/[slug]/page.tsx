@@ -33,6 +33,7 @@ export default function ProductDetailPage() {
   const { addToCart } = useCart()
 
   useEffect(() => {
+    if (!params?.slug) return
     setLoading(true)
     api.get(`/products/${params.slug}`)
       .then(res => {
@@ -41,7 +42,7 @@ export default function ProductDetailPage() {
       })
       .then(res => setRelatedProducts(res.data.products))
       .finally(() => setLoading(false))
-  }, [params.slug])
+  }, [params?.slug])
 
   const handleAddToCart = () => {
     if (!product) return
