@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ChevronRight, Star, Truck, Shield, Headphones, Award, ArrowRight, Check } from 'lucide-react'
 import ProductCard from '@/components/product-card'
+import LiveSalesPopup from '@/components/LiveSalesPopup'
+import CountdownTimer from '@/components/CountdownTimer'
 import api from '@/lib/api'
 
 interface Product {
@@ -50,6 +52,14 @@ export default function HomePage() {
   const [newProducts, setNewProducts] = useState<Product[]>([])
   const [topSelling, setTopSelling] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([])
+  const [liveSaleIndex, setLiveSaleIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveSaleIndex(prev => (prev + 1) % 4)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     Promise.all([
@@ -67,6 +77,11 @@ export default function HomePage() {
 
   return (
     <div className="overflow-hidden">
+      {/* PROMO BAR */}
+      <div className="bg-gradient-to-r from-brand-500 via-sun-500 to-brand-500 text-ink-900 text-xs font-medium py-2.5 text-center">
+        🎉 Ücretsiz kargo! 500 TL üzeri所有 siparişlerde
+      </div>
+
       {/* HERO SECTION */}
       <section className="relative min-h-screen flex items-center justify-center bg-brand-50 overflow-hidden">
 <div className="absolute inset-0 bg-noise" style={{opacity: 0.03}} />
@@ -343,6 +358,17 @@ export default function HomePage() {
       {/* PROMO BANNER */}
       <section className="py-20 bg-gradient-to-r from-brand-500 to-sun-500 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise" style={{opacity: 0.05}} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <CountdownTimer 
+            targetDate={new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)} 
+            label="Kampanya Sonu" 
+          />
+        </div>
+      </section>
+
+      {/* PROMO BANNER */}
+      <section className="py-20 bg-gradient-to-r from-brand-500 to-sun-500 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise" style={{opacity: 0.05}} />
         <div className="absolute top-0 left-0 w-96 h-96 bg-sun-500/30 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-600/30 rounded-full blur-3xl" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -450,6 +476,7 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+      <LiveSalesPopup />
     </div>
   )
 }

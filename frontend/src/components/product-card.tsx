@@ -14,6 +14,7 @@ interface ProductCardProps {
     slug: string
     price: number
     discountedPrice?: number
+    stock: number
     images: string[]
     category?: { name: string }
   }
@@ -51,9 +52,19 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="absolute inset-0 bg-brand-100 animate-pulse" />
           )}
 
-          {product.discountedPrice && (
-            <span className="absolute top-3 left-3 bg-gradient-to-r from-brand-500 to-sun-500 text-ink-900 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg shadow-brand-500/30">
+{product.discountedPrice && (
+            <span className="absolute top-3 left-3 bg-discount-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg shadow-discount-500/30">
               %{Math.round((1 - product.discountedPrice / product.price) * 100)} İNDİRİM
+            </span>
+          )}
+          {product.stock <= 0 && (
+            <span className="absolute top-3 left-3 bg-discount-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg shadow-discount-500/30">
+              STOK TÜKDİ
+            </span>
+          )}
+          {product.stock > 0 && product.stock <= 5 && (
+            <span className="absolute top-3 left-3 bg-sun-500 text-ink-900 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg shadow-sun-500/30">
+              Son {product.stock} tane!
             </span>
           )}
 
