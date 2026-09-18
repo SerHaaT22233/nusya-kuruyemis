@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Bell, X, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
+import api from '@/lib/api'
+
+interface Product {
+  id: string
+  name: string
+  slug: string
+}
 
 interface SaleNotification {
   id: number
@@ -13,36 +20,60 @@ interface SaleNotification {
   time: string
 }
 
+const customerNames = [
+  'Ahmet Y.', 'Fatma K.', 'Mehmet D.', 'Zeynep S.', 'Ali R.',
+  'Ayşe M.', 'Mustafa T.', 'Emine K.', 'Osman B.', 'Hatice D.',
+  'Hüseyin A.', 'Elif N.', 'Murat S.', 'Sultan Y.', 'Burak Ç.',
+  'Derya L.', 'Kaan P.', 'Meltem G.', 'Can V.', 'İlayda B.',
+]
+
+const timeLabels = ['Şimdi', '1 dk önce', '2 dk önce', '3 dk önce', '5 dk önce', '8 dk önce', '12 dk önce']
+
 export default function LiveSalesPopup() {
   const [notifications, setNotifications] = useState<SaleNotification[]>([])
   const [isVisible, setIsVisible] = useState(false)
   const [nextId, setNextId] = useState(1)
-
-  const mockSales: Omit<SaleNotification, 'id'>[] = [
-    { name: 'Ahmet Y.', product: 'Antep Fıstığı', slug: 'antep-fistigi', time: 'Şimdi' },
-    { name: 'Fatma K.', product: 'Kavrulmuş Badem', slug: 'kavrulmus-badem', time: '2 dk önce' },
-    { name: 'Mehmet D.', product: 'Kaju Çekirdeği', slug: 'kaju', time: '5 dk önce' },
-    { name: 'Zeynep S.', product: 'Kuru Üzüm', slug: 'kuru-uzum', time: '8 dk önce' },
-  ]
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    // Show first notification after 3 seconds
+    api.get('/products?limit=20')
+      .then(res => {
+        const data = res.data.products || res.data
+        setProducts(data)
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    if (products.length === 0) return
+
+    const showNotification = () => {
+      const randomProduct = products[Math.floor(Math.random() * products.length)]
+      const randomName = customerNames[Math.floor(Math.random() * customerNames.length)]
+      const randomTime = timeLabels[Math.floor(Math.random() * timeLabels.length)]
+
+      addNotification({
+        name: randomName,
+        product: randomProduct.name,
+        slug: randomProduct.slug,
+        time: randomTime,
+      })
+    }
+
     const timer1 = setTimeout(() => {
-      addNotification(mockSales[0])
+      showNotification()
       setIsVisible(true)
     }, 3000)
 
-    // Show subsequent notifications every 6 seconds
     const interval = setInterval(() => {
-      const randomSale = mockSales[Math.floor(Math.random() * mockSales.length)]
-      addNotification(randomSale)
+      showNotification()
     }, 6000)
 
     return () => {
       clearTimeout(timer1)
       clearInterval(interval)
     }
-  }, [])
+  }, [products])
 
   const addNotification = (sale: Omit<SaleNotification, 'id'>) => {
     const id = nextId
@@ -51,7 +82,6 @@ export default function LiveSalesPopup() {
       const updated = [{ ...sale, id }, ...prev.slice(0, 2)]
       return updated
     })
-    // Auto remove after 5 seconds
     setTimeout(() => {
       setNotifications(prev => prev.filter(n => n.id !== id))
     }, 5000)
