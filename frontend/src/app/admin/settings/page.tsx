@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Save } from 'lucide-react'
 import api from '@/lib/api'
 import { useAuth } from '@/contexts/auth-context'
+import { useSettings } from '@/contexts/settings-context'
 import toast from 'react-hot-toast'
 
 interface SiteSettings {
@@ -23,17 +24,8 @@ interface SiteSettings {
 export default function AdminSettingsPage() {
   const router = useRouter()
   const { user, loading } = useAuth()
-  const [settings, setSettings] = useState<SiteSettings>({
-    siteName: 'Nusya Kuruyemiş',
-    phone: '',
-    email: '',
-    address: '',
-    workingHours: '',
-    primaryColor: '#FF6B00',
-    secondaryColor: '#FFB703',
-    accentColor: '#22C55E',
-    logoUrl: '/logo.svg'
-  })
+  const { settings: contextSettings, updateSettings: updateContextSettings } = useSettings()
+  const [settings, setSettings] = useState<SiteSettings>(contextSettings)
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
@@ -42,11 +34,16 @@ export default function AdminSettingsPage() {
     }
   }, [user, loading, router])
 
+  useEffect(() => {
+    setSettings(contextSettings)
+  }, [contextSettings])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
     try {
       await api.put('/admin/settings', settings)
+      updateContextSettings(settings)
       toast.success('Ayarlar kaydedildi')
     } catch (error) {
       toast.error('Bir hata oluştu')

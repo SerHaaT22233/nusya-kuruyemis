@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { ShoppingCart, User, Menu, X, Search, ChevronDown } from 'lucide-react'
 import { useAuth } from '@/contexts/auth-context'
 import { useCart } from '@/contexts/cart-context'
+import { useSettings } from '@/contexts/settings-context'
 import api from '@/lib/api'
 
 interface Category {
@@ -17,6 +18,7 @@ interface Category {
 export default function Navbar() {
   const { user, logout } = useAuth()
   const { items } = useCart()
+  const { settings } = useSettings()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [categories, setCategories] = useState<Category[]>([])
@@ -37,7 +39,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center space-x-3 group">
-            <Image src="/logo.svg" alt="Nusya" width={64} height={64} className="group-hover:scale-105 transition-transform duration-300" />
+            <Image src={settings.logoUrl || '/logo.svg'} alt="Nusya" width={64} height={64} className="group-hover:scale-105 transition-transform duration-300" />
           </Link>
 
           <div className="hidden md:flex items-center space-x-1">

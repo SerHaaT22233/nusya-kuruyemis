@@ -4,17 +4,19 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, ArrowUpRight } from 'lucide-react'
+import { useSettings } from '@/contexts/settings-context'
 
 export default function Footer() {
+  const { settings } = useSettings()
   return (
     <footer className="bg-ink-900 border-t border-ink-800 pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           <div className="lg:col-span-1">
-<Link href="/" className="inline-block mb-6">
-            <Image src="/logo.svg" alt="Nusya" width={60} height={60} />
-          </Link>
-<p className="text-brand-300 text-sm leading-relaxed mb-8 max-w-xs">
+            <Link href="/" className="inline-block mb-6">
+              <Image src={settings.logoUrl || '/logo.svg'} alt="Nusya" width={60} height={60} />
+            </Link>
+            <p className="text-brand-300 text-sm leading-relaxed mb-8 max-w-xs">
               En kaliteli kuruyemişler en uygun prices. Taze ve lezzetli ürünler sizlerle.
             </p>
             <div className="flex items-center gap-4">
@@ -55,19 +57,15 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">+90 535 227 35 44</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">+90 555 433 33 56</span>
+                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">{settings.phone || '+90 535 227 35 44'}</span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">info@nusya.com</span>
+                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">{settings.email || 'info@nusya.com'}</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-brand-300">Mersin, Türkiye</span>
+                <span className="text-sm text-brand-300">{settings.address || 'Mersin, Türkiye'}</span>
               </li>
             </ul>
           </div>
@@ -75,7 +73,7 @@ export default function Footer() {
 
         <div className="border-t border-ink-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-brand-500 text-xs">
-            © 2026 Nusya Kuruyemiş. Tüm hakları saklıdır.
+            © 2026 {settings.siteName || 'Nusya Kuruyemiş'}. Tüm hakları saklıdır.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-xs text-brand-500 hover:text-brand-200 transition-colors duration-300">Gizlilik Politikası</a>
