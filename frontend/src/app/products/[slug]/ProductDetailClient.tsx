@@ -38,11 +38,14 @@ export default function ProductDetailClient() {
     api.get(`/products/${params.slug}`)
       .then(res => {
         setProduct(res.data)
-        return api.get(`/products?category=${res.data.category.slug}&limit=4`)
+        return api.get(`/products?category=${res.data.category.slug}&limit=8`)
       })
-      .then(res => setRelatedProducts(res.data.products))
+      .then(res => {
+        const all = res.data.products || res.data
+        setRelatedProducts(all.filter((p: Product) => p.id !== product?.id).slice(0, 4))
+      })
       .finally(() => setLoading(false))
-  }, [params?.slug])
+  }, [params?.slug, product?.id])
 
   const handleAddToCart = () => {
     if (!product) return

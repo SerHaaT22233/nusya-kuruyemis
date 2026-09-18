@@ -285,6 +285,17 @@ export default function CheckoutPage() {
                   <Lock className="w-3.5 h-3.5" />
                   256-bit SSL güvenli ödeme
                 </div>
+                {formData.paymentMethod === 'Havale/EFT' && (
+                  <div className="mt-4 p-4 bg-brand-500/[0.06] rounded-xl border border-brand-500/20">
+                    <p className="text-xs font-medium text-brand-600 mb-2">Banka Bilgilerimiz:</p>
+                    <div className="text-xs text-ink-900/70 space-y-1">
+                      <p><span className="font-medium">Banka:</span> Ziraat Bankası</p>
+                      <p><span className="font-medium">IBAN:</span> TR00 0001 1111 2222 3333 4444</p>
+                      <p><span className="font-medium">Hesap Adı:</span> Nusya Kuruyemiş A.Ş.</p>
+                    </div>
+                    <p className="text-xs text-ink-900/40 mt-2">Siparişiniz onaylandıktan sonra kargo firmasına teslim edilir. Ödeme onayı için lütfen dekontunuzu sipariş numarası ile birlikte info@nusyakuruyemis.com adresine gönderin.</p>
+                  </div>
+                )}
               </motion.div>
             </div>
           </div>
