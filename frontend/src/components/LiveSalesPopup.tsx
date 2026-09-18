@@ -29,17 +29,28 @@ const customerNames = [
 
 const timeLabels = ['Şimdi', '1 dk önce', '2 dk önce', '3 dk önce', '5 dk önce', '8 dk önce', '12 dk önce']
 
+const mockProducts: Product[] = [
+  { id: '1', name: 'Antep Fıstığı', slug: 'antep-fistigi' },
+  { id: '2', name: 'Kavrulmuş Badem', slug: 'kavrulmus-badem' },
+  { id: '3', name: 'Kaju Çekirdeği', slug: 'kaju' },
+  { id: '4', name: 'Kuru Üzüm', slug: 'kuru-uzum' },
+  { id: '5', name: 'Fındık', slug: 'findik' },
+  { id: '6', name: 'Çam Fıstığı', slug: 'cam-fistigi' },
+  { id: '7', name: 'Pekmez', slug: 'pekmez' },
+  { id: '8', name: 'Bal', slug: 'bal' },
+]
+
 export default function LiveSalesPopup() {
   const [notifications, setNotifications] = useState<SaleNotification[]>([])
   const [isVisible, setIsVisible] = useState(false)
   const [nextId, setNextId] = useState(1)
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<Product[]>(mockProducts)
 
   useEffect(() => {
     api.get('/products?limit=20')
       .then(res => {
         const data = res.data.products || res.data
-        setProducts(data)
+        if (data && data.length > 0) setProducts(data)
       })
       .catch(() => {})
   }, [])
