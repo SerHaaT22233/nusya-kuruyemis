@@ -244,9 +244,9 @@ function ProductsContent() {
 
                 {totalPages > 1 && (
                   <div className="flex justify-center gap-2 mt-12">
-                    {[...Array(totalPages)].map((_, i) => (
+                    {products.map((product, i) => (
                       <button
-                        key={i}
+                        key={product.id}
                         onClick={() => setCurrentPage(i + 1)}
                         className={`w-10 h-10 rounded-xl text-sm font-medium transition-all duration-300 ${currentPage === i + 1 ? 'bg-brand-500 text-ink-900' : 'bg-white border border-ink-200 text-ink-600 hover:text-brand-600 hover:border-brand-300'}`}
                       >
