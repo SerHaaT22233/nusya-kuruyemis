@@ -125,7 +125,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-ink-900 mb-1">Telefon</h3>
-                  <p className="text-sm text-ink-900/60">+90 555 123 45 67</p>
+                  <p className="text-sm text-ink-900/60">+90 535 227 35 44</p>
+                  <p className="text-sm text-ink-900/60">+90 555 433 33 56</p>
                   <p className="text-xs text-ink-900/40 mt-1">Pazartesi - Cumartesi, 09:00 - 18:00</p>
                 </div>
               </div>
@@ -161,7 +162,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-ink-900 mb-1">WhatsApp</h3>
-                  <p className="text-sm text-ink-900/60">+90 555 123 45 67</p>
+                  <p className="text-sm text-ink-900/60">+90 535 227 35 44</p>
                   <p className="text-xs text-ink-900/40 mt-1">Anında mesaj desteği</p>
                 </div>
               </div>

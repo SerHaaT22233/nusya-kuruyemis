@@ -55,7 +55,11 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">+90 555 123 45 67</span>
+                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">+90 535 227 35 44</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
+                <span className="text-sm text-brand-300 hover:text-white transition-colors duration-300">+90 555 433 33 56</span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
@@ -63,7 +67,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-sun-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-brand-300">İstanbul, Türkiye</span>
+                <span className="text-sm text-brand-300">Mersin, Türkiye</span>
               </li>
             </ul>
           </div>
@@ -71,7 +75,7 @@ export default function Footer() {
 
         <div className="border-t border-ink-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-brand-500 text-xs">
-            © 2024 Nusya Kuruyemiş. Tüm hakları saklıdır.
+            © 2026 Nusya Kuruyemiş. Tüm hakları saklıdır.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-xs text-brand-500 hover:text-brand-200 transition-colors duration-300">Gizlilik Politikası</a>
