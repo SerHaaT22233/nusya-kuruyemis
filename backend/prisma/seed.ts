@@ -82,7 +82,7 @@ async function main() {
         minOrderAmount: 100,
         maxDiscount: 50,
         startDate: new Date('2024-01-01'),
-        endDate: new Date('2025-12-31'),
+        endDate: new Date('2027-12-31'),
         usageLimit: 1000,
         perUserLimit: 5,
         usedCount: 0,
