@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Award, Users, Truck, Shield, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function AboutPage() {
   return (
@@ -31,7 +32,7 @@ export default function AboutPage() {
               2010 yılında küçük bir aile işi olarak başlayan Nusya Kuruyemiş, bugün Türkiye'nin her yerine hizmet veren bir e-ticaret markasına dönüştü. Müşteri memnuniyetini ön planda tutan firmamız, tüm ürünlerini özenle seçer ve en taze haliyle kargoya verir.
             </p>
             <p className="text-ink-900/50 leading-relaxed mb-8">
-              Antep fıstığından badem, fındıktan kajuya; en sevilen kuruyemiş çeşitlerini uygun fiyatlarla sunuyoruz. Amacımız, sofralarınıza en kaliteli ürünleri ulaştırmak.
+              Antep fzığından badem, fzıktan kajuya; en sevilen kuruyemiş çeşitlerini uygun.fiyatlarla sunuyoruz. Amacımız, sofralarınıza en kaliteli ürünleri ulaştırmak.
             </p>
             <Link href="/products" className="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 transition-colors duration-300 group">
               Ürünleri Keşfet
@@ -43,20 +44,11 @@ export default function AboutPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
+            className="relative"
           >
-            {[
-              { icon: Award, title: 'Kalite', desc: 'En iyi ürünler' },
-              { icon: Users, title: 'Güven', desc: 'Binlerce müşteri' },
-              { icon: Truck, title: 'Hız', desc: 'Hızlı teslimat' },
-              { icon: Shield, title: 'Garanti', desc: 'Memnuniyet' },
-            ].map((item, i) => (
-              <div key={i} className="bg-brand-50-card rounded-2xl p-6 border border-ink-200 text-center hover:border-brand-300 transition-all duration-300">
-                <item.icon className="w-8 h-8 text-brand-500 mx-auto mb-3" />
-                <h3 className="font-semibold text-ink-900 mb-1">{item.title}</h3>
-                <p className="text-sm text-ink-900/40">{item.desc}</p>
-              </div>
-            ))}
+            <div className="relative aspect-square rounded-3xl overflow-hidden border border-ink-200 shadow-card">
+              <Image src="/nusya.png" alt="Nusya Kuruyemiş" fill className="object-cover" priority />
+            </div>
           </motion.div>
         </div>
 
@@ -68,7 +60,7 @@ export default function AboutPage() {
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-ink-900 mb-4">Neden Nusya?</h2>
           <p className="text-ink-900/50 max-w-2xl mx-auto mb-8">
-            Amacımız, her müşterimize en kaliteli kuruyemişleri en uygun fiyatlarla sunmak. Taze, lezzetli ve doğal ürünler için Nusya Kuruyemiş'e güvenebilirsiniz.
+            Amacımız, her(customerimize en kaliteli kuruyemişleri en uygun.fiyatlarla sunmak. Taze, lezzetli ve doğal ürünler için Nusya Kuruyemiş'e güvenebilirsiniz.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
