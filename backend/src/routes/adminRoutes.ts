@@ -18,15 +18,13 @@ import {
   createCampaign,
   updateCampaign,
   deleteCampaign,
-  getReviews,
-  approveReview,
-  deleteReview,
   getNotifications,
   markNotificationRead,
   markAllNotificationsRead,
   getSettings,
   updateSettings
 } from '../controllers/adminController'
+import reviewController from '../controllers/reviewController'
 import { authenticate, authorize } from '../middleware/auth'
 import { upload } from '../middleware/upload'
 
@@ -53,9 +51,9 @@ router.post('/campaigns', authenticate, authorize('ADMIN'), createCampaign)
 router.put('/campaigns/:id', authenticate, authorize('ADMIN'), updateCampaign)
 router.delete('/campaigns/:id', authenticate, authorize('ADMIN'), deleteCampaign)
 
-router.get('/reviews', authenticate, authorize('ADMIN'), getReviews)
-router.put('/reviews/:id/approve', authenticate, authorize('ADMIN'), approveReview)
-router.delete('/reviews/:id', authenticate, authorize('ADMIN'), deleteReview)
+router.get('/reviews', authenticate, authorize('ADMIN'), reviewController.getReviews)
+router.put('/reviews/:id/approve', authenticate, authorize('ADMIN'), reviewController.approveReview)
+router.delete('/reviews/:id', authenticate, authorize('ADMIN'), reviewController.deleteReview)
 
 router.get('/notifications', authenticate, getNotifications)
 router.put('/notifications/:id/read', authenticate, markNotificationRead)
