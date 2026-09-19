@@ -20,19 +20,19 @@ export default function AboutPage() {
           <p className="text-ink-900/50 max-w-2xl mx-auto">En kaliteli kuruyemişleri sizlere sunmak için 2010 yılından beri hizmet veriyoruz.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
             <span className="inline-block text-xs font-medium text-brand-500 uppercase tracking-wider mb-4">Hikayemiz</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-ink-900 mb-6">Taze ve Kaliteli</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink-900 mb-6">Taze ve Kaliteli</h2>
             <p className="text-ink-900/50 leading-relaxed mb-6">
-              2025 yılında küçük bir aile işi olarak başlayan Nusya Kuruyemiş, bugün Türkiye'nin her yerine hizmet veren bir e-ticaret markasına dönüştü. Müşteri memnuniyetini ön planda tutan firmamız, tüm ürünlerini özenle seçer ve en taze haliyle kargoya verir.
+              2010 yılında küçük bir aile işi olarak başlayan Nusya Kuruyemiş, bugün Türkiye'nin her yerine hizmet veren bir e-ticaret markasına dönüştü. Müşteri memnuniyetini ön planda tutan firmamız, tüm ürünlerini özenle seçer ve en taze haliyle kargoya verir.
             </p>
             <p className="text-ink-900/50 leading-relaxed mb-8">
-              Antep Fıstığından bademe,  kajuya; en sevilen kuruyemiş çeşitlerini uygun.fiyatlarla sunuyoruz. Amacımız, sofralarınıza en kaliteli ürünleri ulaştırmak.
+              Antep fzığından bademe, kajuya; en sevilen kuruyemiş çeşitlerini uygun.fiyatlarla sunuyoruz. Amacımız, sofralarınıza en kaliteli ürünleri ulaştırmak.
             </p>
             <Link href="/products" className="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 transition-colors duration-300 group">
               Ürünleri Keşfet
@@ -44,9 +44,9 @@ export default function AboutPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative"
+            className="relative flex justify-center"
           >
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-orange-100 to-sun-100 border border-brand-200 flex items-center justify-center shadow-card">
+            <div className="w-full max-w-md aspect-square rounded-3xl bg-gradient-to-br from-orange-100 to-sun-100 border border-brand-200 flex items-center justify-center shadow-card overflow-hidden">
               <Image src="/nusya.png" alt="Nusya Kuruyemiş" width={400} height={400} className="w-full h-full object-cover rounded-3xl" priority />
             </div>
           </motion.div>
