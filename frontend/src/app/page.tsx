@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronRight, Star, Truck, Shield, Headphones, Award, ArrowRight, Check } from 'lucide-react'
 import ProductCard from '@/components/product-card'
@@ -79,7 +80,7 @@ export default function HomePage() {
     <div className="overflow-hidden">
       {/* PROMO BAR */}
       <div className="bg-gradient-to-r from-brand-500 via-sun-500 to-brand-500 text-ink-900 text-xs font-medium py-2.5 text-center">
-        🎉 Ücretsiz kargo! 500 TL üzeri所有 siparişlerde
+        🎉 Ücretsiz kargo! 500 TL üzeri tüm siparişlerde
       </div>
 
       {/* HERO SECTION */}
@@ -157,11 +158,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-200/50 to-sun-200/50 rounded-full blur-3xl" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-orange-400/30 to-sun-400/30" />
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-9xl mb-4">🥜</div>
-                    <div className="text-6xl mb-2">🫒</div>
-                    <div className="text-6xl">🌰</div>
-                  </div>
+                  <Image src="/nusya.png" alt="Nusya Kuruyemiş" width={500} height={500} className="w-full max-w-lg object-contain drop-shadow-2xl" priority />
                 </div>
               </div>
             </motion.div>
