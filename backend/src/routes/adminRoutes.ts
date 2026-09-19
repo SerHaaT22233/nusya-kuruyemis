@@ -24,7 +24,7 @@ import {
   getSettings,
   updateSettings
 } from '../controllers/adminController'
-import reviewController from '../controllers/reviewController'
+import * as reviewController from '../controllers/reviewController'
 import { authenticate, authorize } from '../middleware/auth'
 import { upload } from '../middleware/upload'
 
