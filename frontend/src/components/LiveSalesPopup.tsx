@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Bell, X, ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
@@ -43,8 +43,8 @@ const mockProducts: Product[] = [
 export default function LiveSalesPopup() {
   const [notifications, setNotifications] = useState<SaleNotification[]>([])
   const [isVisible, setIsVisible] = useState(false)
-  const [nextId, setNextId] = useState(1)
   const [products, setProducts] = useState<Product[]>(mockProducts)
+  const idCounter = useRef(0)
 
   useEffect(() => {
     api.get('/products?limit=20')
@@ -87,8 +87,8 @@ export default function LiveSalesPopup() {
   }, [products])
 
   const addNotification = (sale: Omit<SaleNotification, 'id'>) => {
-    const id = nextId
-    setNextId(prev => prev + 1)
+    idCounter.current += 1
+    const id = idCounter.current
     setNotifications(prev => {
       const updated = [{ ...sale, id }, ...prev.slice(0, 2)]
       return updated
