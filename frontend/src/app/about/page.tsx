@@ -29,10 +29,10 @@ export default function AboutPage() {
             <span className="inline-block text-xs font-medium text-brand-500 uppercase tracking-wider mb-4">Hikayemiz</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-ink-900 mb-6">Taze ve Kaliteli</h2>
             <p className="text-ink-900/50 leading-relaxed mb-6">
-              2010 yılında küçük bir aile işi olarak başlayan Nusya Kuruyemiş, bugün Türkiye'nin her yerine hizmet veren bir e-ticaret markasına dönüştü. Müşteri memnuniyetini ön planda tutan firmamız, tüm ürünlerini özenle seçer ve en taze haliyle kargoya verir.
+              2025 yılında küçük bir aile işi olarak başlayan Nusya Kuruyemiş, bugün Türkiye'nin her yerine hizmet veren bir e-ticaret markasına dönüştü. Müşteri memnuniyetini ön planda tutan firmamız, tüm ürünlerini özenle seçer ve en taze haliyle kargoya verir.
             </p>
             <p className="text-ink-900/50 leading-relaxed mb-8">
-              Antep fzığından badem, fzıktan kajuya; en sevilen kuruyemiş çeşitlerini uygun.fiyatlarla sunuyoruz. Amacımız, sofralarınıza en kaliteli ürünleri ulaştırmak.
+              Antep Fıstığından bademe,  kajuya; en sevilen kuruyemiş çeşitlerini uygun.fiyatlarla sunuyoruz. Amacımız, sofralarınıza en kaliteli ürünleri ulaştırmak.
             </p>
             <Link href="/products" className="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 transition-colors duration-300 group">
               Ürünleri Keşfet
@@ -46,8 +46,8 @@ export default function AboutPage() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative aspect-square rounded-3xl overflow-hidden border border-ink-200 shadow-card">
-              <Image src="/nusya.png" alt="Nusya Kuruyemiş" fill className="object-cover" priority />
+            <div className="aspect-square rounded-3xl bg-gradient-to-br from-orange-100 to-sun-100 border border-brand-200 flex items-center justify-center shadow-card">
+              <Image src="/nusya.png" alt="Nusya Kuruyemiş" width={400} height={400} className="w-full h-full object-cover rounded-3xl" priority />
             </div>
           </motion.div>
         </div>
